@@ -1,6 +1,7 @@
 *.bin
 *.userdb/*
 installation.yaml
+user.yaml
 *.swp
 .DS_Store
 Thumbs.db
