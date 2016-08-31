@@ -1,3 +1,5 @@
 *.bin
-*.userdb/
+*.userdb/*
 installation.yaml
+.DS_Store
+Thumbs.db
