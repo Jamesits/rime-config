@@ -10,6 +10,8 @@ app_options:
     ascii_mode: true
   com.blacktree.Quicksilver:
     ascii_mode: true
+  com.github.atom:
+    ascii_mode: true
   com.googlecode.iterm2:
     ascii_mode: true
   com.macromates.TextMate.preview:
@@ -28,8 +30,8 @@ app_options:
     ascii_mode: true
     no_inline: true
 chord_duration: 0.1
-config_version: 0.22.custom.4173050637
-customization: 4173050637
+config_version: 0.22.custom.2741890162
+customization: 2741890162
 preset_color_schemes:
   solarized_dark:
     author: "James Swineson <i@swineson.me>, based on Ethan Schoonover's Solarized color scheme"
