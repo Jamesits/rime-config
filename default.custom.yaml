@@ -3,6 +3,8 @@ patch:
   menu/page_size: 9
   schema_list:
     - schema: double_pinyin
+    - schema: double_pinyin_flypy
+    - schema: double_pinyin_mspy
     - schema: luna_pinyin
     - schema: wubi86
     - schema: english

@@ -26,6 +26,8 @@ patch:
      ascii_mode: true
     com.runningwithcrayons.Alfred-2:
       ascii_mode: true
+    com.runningwithcrayons.Alfred-3:
+      ascii_mode: true
     com.blacktree.Quicksilver:
       ascii_mode: true
     com.apple.Terminal:
@@ -47,4 +49,6 @@ patch:
     org.gnu.Aquamacs:
       ascii_mode: true
     org.gnu.Emacs:
+      ascii_mode: true
+    com.github.atom:
       ascii_mode: true

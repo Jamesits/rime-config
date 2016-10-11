@@ -16,6 +16,8 @@ app_options:
     ascii_mode: true
   "com.runningwithcrayons.Alfred-2":
     ascii_mode: true
+  "com.runningwithcrayons.Alfred-3":
+    ascii_mode: true
   com.sublimetext.2:
     ascii_mode: true
   org.gnu.Aquamacs:
@@ -26,8 +28,8 @@ app_options:
     ascii_mode: true
     no_inline: true
 chord_duration: 0.1
-config_version: 0.22.custom.347332959
-customization: 347332959
+config_version: 0.22.custom.4173050637
+customization: 4173050637
 preset_color_schemes:
   solarized_dark:
     author: "James Swineson <i@swineson.me>, based on Ethan Schoonover's Solarized color scheme"
