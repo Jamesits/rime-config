@@ -1,4 +1,4 @@
-customization: 1497811003
+customization: 1305977280
 engine:
   filters:
     - simplifier
@@ -51,7 +51,7 @@ schema:
     
   name: "自然碼雙拼"
   schema_id: double_pinyin
-  version: 0.15.custom.1497811003
+  version: 0.15.custom.1305977280
 speller:
   algebra:
     - "erase/^xx$/"
@@ -97,7 +97,7 @@ switches:
   - name: ascii_punct
     states: ["。，", "．，"]
 translator:
-  dictionary: luna_pinyin.extended
+  dictionary: double_pinyin.extended
   preedit_format:
     - "xform/([bpmnljqxy])n/$1in/"
     - "xform/(\\w)g/$1eng/"
