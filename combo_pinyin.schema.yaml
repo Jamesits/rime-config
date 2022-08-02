@@ -1,15 +1,15 @@
 # Rime schema
-# vim: set sw=2 sts=2 et:
 # encoding: utf-8
 
 schema:
   schema_id: combo_pinyin
   name: 宮保拼音
-  version: "0.1"
+  version: '2.0'
   author:
-    - 佛振 <chen.sst@gmail.com>
+    - 居戎氏 <chen.sst@gmail.com>
   description: |
     並擊輸入拼音
+    https://github.com/rime/home/wiki/ComboPinyin
 
 switches:
   - name: ascii_mode
@@ -19,12 +19,14 @@ switches:
     states: [ 半角, 全角 ]
   - name: simplification
     states: [ 漢字, 汉字 ]
+  - name: ascii_punct
+    states: [ 。，, ．， ]
 
 engine:
   processors:
     - ascii_composer
-    - chord_composer
     - recognizer
+    - chord_composer  # 實現並擊按鍵處理
     - key_binder
     - speller
     - punctuator
@@ -39,80 +41,33 @@ engine:
     - fallback_segmentor
   translators:
     - punct_translator
-    - r10n_translator
+    - script_translator
   filters:
     - simplifier
     - uniquifier
 
-speller:
-  alphabet: zyxwvutsrqponmlkjihgfedcba
-  delimiter: " '"
-  algebra:
-    - erase/^xx$/
-
 chord_composer:
-  alphabet: "swxdecfrvgtbnjum ki,lo."
+
+editor:
+  bindings:
+    BackSpace: back_syllable
+
+speller:
+  alphabet: "zyxwvutsrqponmlkjihgfedcba'"
+  initials: "zyxwvutsrqponmlkjihgfedcba"
+  delimiter: " "
   algebra:
-    - 'xlit|swxdecfrvgtbnjum ki,lo.|sczhlfgdbktpRiuVaNIUeoE|'
-    - xform/^zf/zh/
-    - xform/^cl/ch/
-    - xform/^fb/m/
-    - xform/^ld/n/
-    - xform/^hg/r/
-    - xform/^[gz]([iV])/j$1/
-    - xform/^[kc]([iV])/q$1/
-    - xform/^[hs]([iV])/x$1/
-    - 'xform/^a$/ /'
-    - xform/ae$/a/
-    - xform/^U$/,/
-    - xform/^E$/./
-    - xform/(ua?)Io$/$1Ne/
-    - xform/aI$/ai/
-    - xform/I[oe]$/ei/
-    - xform/uI$/uei/
-    - xform/^gI$/ji/
-    - xform/^kI$/qi/
-    - xform/^hI$/xi/
-    - xform/I$/i/
-    - xform/VUE$/VNe/
-    - xform/V(a?)U$/i$1U/
-    - xform/aU$/ao/
-    - xform/UE?$/ou/
-    - xform/([aiuV])Ne$/$1ng/
-    - xform/Ne$/eng/
-    - xform/^ung$/weng/
-    - xform/ung$/ong/
-    - xform/Vng$/iong/
-    - xform/([aiuV])N$/$1n/
-    - xform/N$/en/
-    - xform/^un$/wen/
-    - xform/R$/er/
-    - xform/^i(ng?)$/yi$1/
-    - xform/^i$/yi/
-    - xform/^i/y/
-    - xform/^u$/wu/
-    - xform/^u/w/
-    - xform/^V/yu/
-    - xform/^([jqx])V/$1u/
-    - xform/^([zcsr]h?)i([aoe])/$1$2/
-    - xform/^([zcsr]h?)i(ng?)$/$1e$2/
-    - xform/iou$/iu/
-    - xform/uei$/ui/
-    - xlit/VE/ve/
-    - xform/^([bpf])$/$1u/
-    - xform/^([mdtnlgkh])$/$1e/
-    - xform/^([mdtnlgkh])$/$1e/
-    - xform/^([zcsr]h?)$/$1i/
-  output_format:
+    # 拼音音節一律後加隔音符號，避免音節切分歧義
     - "xform/^([a-z]+)$/$1'/"
-  prompt_format:
-    - "xform/^(.*)$/[$1]/"
 
 translator:
   dictionary: luna_pinyin
   prism: combo_pinyin
   preedit_format:
-    - xform/([jqxynl])v/$1ü/
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+    - "xform/' /'/"
 
 punctuator:
   import_preset: default
@@ -122,3 +77,28 @@ key_binder:
 
 recognizer:
   import_preset: default
+
+__patch:
+  # 默認七指禪（大衆式）
+  - combo_pinyin_layouts:/use_gia_layout
+  # 解封下列代碼，選用其他佈局選項
+  # 八指禪，默認字母A = h
+  # - combo_pinyin_layouts:/use_zhia_layout
+  # 八指禪：選定左手拇指 h 鍵
+  # - combo_pinyin_layouts:/use_semicolon
+  # - combo_pinyin_layouts:/use_apostrophe
+  # - combo_pinyin_layouts:/use_control
+  # - combo_pinyin_layouts:/use_alt
+  # - combo_pinyin_layouts:/use_shift
+  # 九指禪
+  # - combo_pinyin_layouts:/use_gya_layout
+  # 十指禪，左、右拇指鍵設爲：空格鍵、單引號鍵
+  # - combo_pinyin_layouts:/use_gywa_layout
+  # 十指禪·Emacs用家，左、右拇指鍵設爲：Control鍵、空格鍵
+  # - combo_pinyin_layouts:/use_gywa_emacsen_layout
+
+  # 使用八股文語言模型
+  - grammar:/hant?
+
+  # 用家自選配置
+  - combo_pinyin.custom:/patch?

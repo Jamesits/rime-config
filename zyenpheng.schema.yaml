@@ -1,17 +1,18 @@
-﻿# Rime schema
-# vim: set sw=2 sts=2 et:
+# Rime schema
 # encoding: utf-8
 
 schema:
   schema_id: zyenpheng
   name: 中古全拼
-  version: "2012.07.07"
+  version: "2014.04.30"
   author:
     - 古韻 <biopolyhedron@gmail.com>
   description: |
     採用《廣韻》音系的中古漢語拼音，亦稱「古韻羅馬字」。
-    韻典網・廣韻 http://ytenx.org/kyonh/
+    韻典網·廣韻 http://ytenx.org/kyonh/
     http://zh.wikipedia.org/wiki/User:Polyhedron/中古漢語拼音
+  dependencies:
+    - luna_pinyin
 
 switches:
   - name: ascii_mode
@@ -21,6 +22,8 @@ switches:
     states: [ 全角, 半角 ]
   - name: simplification
     states: [ 漢字, 汉字 ]
+  - name: ascii_punct
+    states: [ 。，, ．， ]
 
 engine:
   processors:
@@ -40,7 +43,7 @@ engine:
     - fallback_segmentor
   translators:
     - punct_translator
-    - r10n_translator
+    - script_translator
     - reverse_lookup_translator
   filters:
     - simplifier
@@ -64,14 +67,17 @@ speller:
 
 translator:
   dictionary: zyenpheng
-  spelling_hints: 4
+  spelling_hints: 8
 
 reverse_lookup:
   dictionary: luna_pinyin
   prefix: "`"
+  suffix: "'"
   tips: 〔拼音〕
   preedit_format:
-    - xform/([nljqxy])v/$1ü/
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
 
 punctuator:
   import_preset: default
@@ -82,4 +88,4 @@ key_binder:
 recognizer:
   import_preset: default
   patterns:
-    reverse_lookup: "`[a-z]*$"
+    reverse_lookup: "`[a-z]*'?$"

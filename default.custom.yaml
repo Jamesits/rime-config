@@ -1,11 +1,4 @@
-patch: 
-  switcher/caption: [方案菜单]
-  menu/page_size: 9
+patch:
   schema_list:
     - schema: double_pinyin
-    - schema: double_pinyin_flypy
-    - schema: double_pinyin_mspy
-    - schema: luna_pinyin
-    - schema: wubi86
-    - schema: english
-    - schema: emoji
+
