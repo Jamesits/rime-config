@@ -4,3 +4,4 @@ patch:
   #标点及特殊表情
   'punctuator/import_preset': symbols
   'recognizer/patterns/punct': "^/([a-z]+|[0-9])$"
+  'switches/@2/reset': 1 # 默认简体
