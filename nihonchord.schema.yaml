@@ -1,0 +1,363 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: nihonchord
+  name: 日本和弦
+  version: "0.0.1"
+  author:
+    - Delton Ding <dsh0416@gmail.com>
+  description: |
+    並擊日文輸入
+    https://github.com/dsh0416/nihonchord
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 日文, 西文 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: simplification
+    states: [ 漢字, 汉字 ]
+  - name: ascii_punct
+    states: [ 。、, ．， ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - chord_composer  # 實現並擊按鍵處理
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - reverse_lookup_translator
+  filters:
+    - simplifier
+    - uniquifier
+
+editor:
+  bindings:
+    BackSpace: back_syllable
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+
+chord_composer:
+  alphabet: "jiophuklnmqwerasdzxfgcvytb"
+  algebra:
+    - 'xlit|jiophuklnmqwerasdzxfgcvytb|ZysthwkrnmAUONauoieHSLDYTB|'
+    # Z: 零声母
+    # A: 拗音 ya
+    # U: 拗音 yu
+    # O: 拗音 yo
+    # H: 半濁音
+    # S: 促音
+    # L: ちさい
+    # D: 濁音
+    # Y: ー
+    # T: ・
+    # B: 踊り字
+
+    - xform/^T$/ten'/
+    - xform/^B$/symbol'/
+    - xform/^Y$/long'/
+    - xform/^S$/ltu'/
+    - xform/^ZaL$/la'/
+    - xform/^ZiL$/li'/
+    - xform/^ZuL$/lu'/
+    - xform/^ZeL$/le'/
+    - xform/^ZoL$/lo'/
+    - xform/^ZAL$/lya'/
+    - xform/^ZUL$/lyu'/
+    - xform/^ZOL$/lyo'/
+    - xform/^kaL$/lka'/
+    - xform/^keL$/lke'/
+    - xform/^tuL$/ltu'/
+    - xform/^tuL$/lwa'/
+
+    - xform/^ZN$/n'/
+    - xform/^N$/n'/
+    - xform/^Za$/a'/
+    - xform/^Zi$/i'/
+    - xform/^Zu$/u'/
+    - xform/^Ze$/e'/
+    - xform/^Zo$/o'/
+    - xform/^ZA$/ya'/
+    - xform/^ZU$/yu'/
+    - xform/^ZO$/yo'/
+    - xform/^uD$/vu'/
+
+    - xform/^ka$/ka'/
+    - xform/^ki$/ki'/
+    - xform/^ku$/ku'/
+    - xform/^ke$/ke'/
+    - xform/^ko$/ko'/
+    - xform/^kA$/ki'lya'/
+    - xform/^kU$/ki'lyu'/
+    - xform/^kO$/ki'lyo'/
+    - xform/^kaD$/ga'/
+    - xform/^kiD$/gi'/
+    - xform/^kuD$/gu'/
+    - xform/^keD$/ge'/
+    - xform/^koD$/go'/
+    - xform/^kaH$/nga'/
+    - xform/^kiH$/ngi'/
+    - xform/^kuH$/ngu'/
+    - xform/^keH$/nge'/
+    - xform/^koH$/ngo'/
+    - xform/^sa$/sa'/
+    - xform/^si$/si'/
+    - xform/^su$/su'/
+    - xform/^se$/se'/
+    - xform/^so$/so'/
+    - xform/^sA$/si'lya'/
+    - xform/^sU$/si'lyu'/
+    - xform/^sO$/si'lyo'/
+    - xform/^saD$/za'/
+    - xform/^siD$/zi'/
+    - xform/^suD$/zu'/
+    - xform/^sAD$/zi'lya/
+    - xform/^sUD$/zi'lyu/
+    - xform/^sOD$/zi'lyo/
+    - xform/^seD$/ze'/
+    - xform/^soD$/zo'/
+    - xform/^seH$/ce'/
+    - xform/^ta$/ta'/
+    - xform/^ti$/ti'/
+    - xform/^tu$/tu'/
+    - xform/^te$/te'/
+    - xform/^to$/to'/
+    - xform/^tA$/ti'lya'/
+    - xform/^tU$/ti'lyu'/
+    - xform/^tO$/ti'lyo'/
+    - xform/^taD$/da'/
+    - xform/^tiD$/di'/
+    - xform/^tuD$/du'/
+    - xform/^teD$/de'/
+    - xform/^toD$/do'/
+    - xform/^tAD$/di'lya'/
+    - xform/^tUD$/di'lyu'/
+    - xform/^tOD$/di'lyo'/
+
+    - xform/^na$/na'/
+    - xform/^ni$/ni'/
+    - xform/^nu$/nu'/
+    - xform/^ne$/ne'/
+    - xform/^no$/no'/
+    - xform/^nA$/ni'lya'/
+    - xform/^nU$/ni'lyu'/
+    - xform/^nO$/ni'lyo'/
+
+    - xform/^ha$/ha'/
+    - xform/^hi$/hi'/
+    - xform/^hu$/hu'/
+    - xform/^he$/he'/
+    - xform/^ho$/ho'/
+    - xform/^hA$/hi'lya'/
+    - xform/^hU$/hi'lyu'/
+    - xform/^hO$/hi'lyo'/
+    - xform/^haD$/ba'/
+    - xform/^hiD$/bi'/
+    - xform/^huD$/bu'/
+    - xform/^heD$/be'/
+    - xform/^hoD$/bo'/
+    - xform/^hAD$/bi'lya'/
+    - xform/^hUD$/bi'lyu'/
+    - xform/^hOD$/bi'lyo'/
+    - xform/^haH$/pa'/
+    - xform/^hiH$/pi'/
+    - xform/^huH$/pu'/
+    - xform/^heH$/pe'/
+    - xform/^hoH$/po'/
+    - xform/^hAH$/pi'lya'/
+    - xform/^hUH$/pi'lyu'/
+    - xform/^hOH$/pi'lyo'/
+
+    - xform/^ma$/ma'/
+    - xform/^mi$/mi'/
+    - xform/^mu$/mu'/
+    - xform/^me$/me'/
+    - xform/^mo$/mo'/
+    - xform/^mA$/mi'lya'/
+    - xform/^mU$/mi'lyu'/
+    - xform/^mO$/mi'lyo'/
+
+    - xform/^ya$/ya'/
+    - xform/^yi$/i'/
+    - xform/^yu$/yu'/
+    - xform/^ye$/e'/
+    - xform/^yo$/yo'/
+
+    - xform/^ra$/ra'/
+    - xform/^ri$/ri'/
+    - xform/^ru$/ru'/
+    - xform/^re$/re'/
+    - xform/^ro$/ro'/
+    - xform/^rA$/ri'lya'/
+    - xform/^rU$/ri'lyu'/
+    - xform/^rO$/ri'lyo'/
+    - xform/^raH$/rra'/
+    - xform/^riH$/rri'/
+    - xform/^ruH$/rru'/
+    - xform/^reH$/rre'/
+    - xform/^roH$/rro'/
+
+    - xform/^wa$/wa'/
+    - xform/^wi$/u'li'/
+    - xform/^wu$/u'/
+    - xform/^we$/u'le'/
+    - xform/^wo$/wo'/
+  output_format:
+    - "erase/^([A-Za-z]+)$/"
+  prompt_format:
+    - "xform/^(.*)$/[$1]/"
+
+translator:
+  dictionary: nihonchord
+  prism: nihonchord
+  spelling_hints: 4
+  comment_format:
+    - xform/(^|\s)ten/・/
+    - xform/(^|\s)symbol/々/
+    - xform/(^|\s)long/ー/
+    - xform/(^|\s)ltu/っ/
+    - xform/(^|\s)long/ー/
+    - xform/(^|\s)la/ぁ/
+    - xform/(^|\s)li/ぃ/
+    - xform/(^|\s)lu/ぅ/
+    - xform/(^|\s)le/ぇ/
+    - xform/(^|\s)lo/ぉ/
+    - xform/(^|\s)lya/ゃ/
+    - xform/(^|\s)lyu/ゅ/
+    - xform/(^|\s)lyo/ょ/
+    - xform/(^|\s)lka/ヵ/
+    - xform/(^|\s)lke/ヶ/
+    - xform/(^|\s)lwa/ゎ/
+    - xform/(^|\s)nga/かﾟ/
+    - xform/(^|\s)ngi/きﾟ/
+    - xform/(^|\s)ngu/くﾟ/
+    - xform/(^|\s)nge/けﾟ/
+    - xform/(^|\s)ngo/こﾟ/
+    - xform/(^|\s)ya/や/
+    - xform/(^|\s)yu/ゆ/
+    - xform/(^|\s)yo/よ/
+    - xform/(^|\s)vu/ゔ/
+    - xform/(^|\s)ka/か/
+    - xform/(^|\s)ki/き/
+    - xform/(^|\s)ku/く/
+    - xform/(^|\s)ke/け/
+    - xform/(^|\s)ko/こ/
+    - xform/(^|\s)ga/が/
+    - xform/(^|\s)gi/ぎ/
+    - xform/(^|\s)gu/ぐ/
+    - xform/(^|\s)ge/げ/
+    - xform/(^|\s)go/ご/
+    - xform/(^|\s)sa/さ/
+    - xform/(^|\s)si/し/
+    - xform/(^|\s)su/す/
+    - xform/(^|\s)se/せ/
+    - xform/(^|\s)so/そ/
+    - xform/(^|\s)za/ざ/
+    - xform/(^|\s)zi/じ/
+    - xform/(^|\s)zu/ず/
+    - xform/(^|\s)ze/ぜ/
+    - xform/(^|\s)zo/ぞ/
+    - xform/(^|\s)ce/せﾟ/
+    - xform/(^|\s)ta/た/
+    - xform/(^|\s)ti/ち/
+    - xform/(^|\s)tu/つ/
+    - xform/(^|\s)te/て/
+    - xform/(^|\s)to/と/
+    - xform/(^|\s)da/だ/
+    - xform/(^|\s)di/ぢ/
+    - xform/(^|\s)du/づ/
+    - xform/(^|\s)de/で/
+    - xform/(^|\s)do/ど/
+    - xform/(^|\s)na/な/
+    - xform/(^|\s)ni/に/
+    - xform/(^|\s)nu/ぬ/
+    - xform/(^|\s)ne/ね/
+    - xform/(^|\s)no/の/
+    - xform/(^|\s)ha/は/
+    - xform/(^|\s)hi/ひ/
+    - xform/(^|\s)hu/ふ/
+    - xform/(^|\s)he/へ/
+    - xform/(^|\s)ho/ほ/
+    - xform/(^|\s)ba/ば/
+    - xform/(^|\s)bi/び/
+    - xform/(^|\s)bu/ぶ/
+    - xform/(^|\s)be/べ/
+    - xform/(^|\s)bo/ぼ/
+    - xform/(^|\s)pa/ぱ/
+    - xform/(^|\s)pi/ぴ/
+    - xform/(^|\s)pu/ぷ/
+    - xform/(^|\s)pe/ぺ/
+    - xform/(^|\s)po/ぽ/
+    - xform/(^|\s)ma/ま/
+    - xform/(^|\s)mi/み/
+    - xform/(^|\s)mu/む/
+    - xform/(^|\s)me/め/
+    - xform/(^|\s)mo/も/
+    - xform/(^|\s)ra/ら/
+    - xform/(^|\s)ri/り/
+    - xform/(^|\s)ru/る/
+    - xform/(^|\s)re/れ/
+    - xform/(^|\s)ro/ろ/
+    - xform/(^|\s)rra/らﾟ/
+    - xform/(^|\s)rri/りﾟ/
+    - xform/(^|\s)rru/るﾟ/
+    - xform/(^|\s)rre/れﾟ/
+    - xform/(^|\s)rro/ろﾟ/
+    - xform/(^|\s)wa/わ/
+    - xform/(^|\s)wo/を/
+    - xform/(^|\s)n/ん/
+    - xform/(^|\s)a/あ/
+    - xform/(^|\s)i/い/
+    - xform/(^|\s)u/う/
+    - xform/(^|\s)e/え/
+    - xform/(^|\s)o/お/
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    reverse_lookup: "`[a-z]*$"
+
+reverse_lookup:
+  dictionary: nihonchord
+  enable_completion: true
+  prefix: "`"
+  tips: 〔NihonChord〕
+
+punctuator:
+  half_shape:
+    "," : { commit: 、 }
+    "." : { commit: 。 }
+    "<" : { commit: ＜ }
+    ">" : { commit: ＞ }
+    "/" : { commit: ・ }
+    "?" : { commit: ？ }
+    ";" : { commit: ； }
+    ":" : { commit: ： }
+    "[" : { commit: 「 }
+    "]" : { commit: 」 }
+    "{" : { commit: 『 }
+    "}" : { commit: 』 }
+
