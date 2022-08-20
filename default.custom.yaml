@@ -7,6 +7,6 @@ patch:
     # - schema: double_pinyin_mspy
     - schema: luna_pinyin
     - schema: wubi86
+    - schema: japanese
     - schema: english
     - schema: emoji
-    - schema: japanese
