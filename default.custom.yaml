@@ -1,4 +1,4 @@
-patch: 
+patch:
   switcher/caption: [方案菜单]
   menu/page_size: 9
   schema_list:
@@ -9,3 +9,4 @@ patch:
     - schema: wubi86
     - schema: english
     - schema: emoji
+    - schema: japanese
