@@ -2,3 +2,74 @@ patch:
   style/horizontal: true      # 候選橫排
   style/inline_preedit: true  # 內嵌編碼（僅支持TSF）
   style/display_tray_icon: true  # 顯示托盤圖標
+  "style/color_scheme": penumbra_dark_plus
+  "preset_color_schemes/ubik":
+    author: Electric Sheep <shinzoqchiuq@outlook.com>
+    back_color: 0x000000
+    border_color: 0x804040
+    text_color: 0xE0E0FF
+    hilited_text_color: 0x4040FF
+    hilited_back_color: 0x000000
+    hilited_comment_text_color: 0x80D0D0
+    hilited_candidate_back_color: 0x000000
+    hilited_candidate_text_color: 0x64FF64
+    candidate_text_color: 0xFFFFFF
+    comment_text_color: 0x80D0D0
+    label_color: 0x808080
+    name: Ubik
+  "preset_color_schemes/ubik2":
+    author: Electric Sheep <shinzoqchiuq@outlook.com>
+    back_color: 0x000000
+    border_color: 0x804040
+    text_color: 0xE0E0FF
+    hilited_text_color: 0x4040FF
+    hilited_back_color: 0x000000
+    hilited_comment_text_color: 0x80D0D0
+    hilited_candidate_back_color: 0x000000
+    hilited_candidate_text_color: 0x6060FF
+    candidate_text_color: 0xFFFFFF
+    comment_text_color: 0x80D0D0
+    label_color: 0x808080
+    name: Ubik2
+  "preset_color_schemes/momo":  # 配色方案列表加入名字momo的配色方案
+    name: 默默／Momo
+    author: Momo
+    text_color: 0x000000             # 編碼行文字顏色，24位色值，用十六進制書寫方便些，順序是藍綠紅0xBBGGRR
+    candidate_text_color: 0x000000   # 候選項文字顏色，當與文字顏色不同時指定
+    back_color: 0xFFFFFF             # 底色
+    border_color: 0xFFFFFF          # 邊框顏色，與底色相同則爲無邊框的效果
+    hilited_text_color: 0x000000     # 高亮文字，即與當前高亮候選對應的那部份輸入碼
+    hilited_back_color: 0xFFFFFF     # 設定高亮文字的底色，可起到凸顯高亮部份的作用
+    hilited_candidate_text_color: 0xEE6E00  # 高亮候選項的文字顏色，要醒目！
+    hilited_candidate_back_color: 0xFFFFFF  # 高亮候選項的底色，若與背景色不同就會顯出光棒
+  # 在配色方案列表裏加入標識爲 starcraft 的新方案
+  "preset_color_schemes/Mxy":
+    name: 興宇／Mxy
+    author: Mxy
+    # 編碼行文字顏色，24位色值，用十六進制書寫方便些，順序是藍綠紅0xBBGGRR
+    text_color: 0x000000
+    # 候選項文字顏色，當與文字顏色不同時指定
+    #candidate_text_color
+    # 底色
+    back_color: 0xFCFCFC
+    # 邊框顏色，與底色相同則爲無邊框的效果
+    border_color: 0xFCFCFC
+    # 高亮文字，即與當前高亮候選對應的那部份輸入碼
+    #hilited_text_color: 0xfecb96
+    # 設定高亮文字的底色，可起到凸顯高亮部份的作用
+    #hilited_back_color: 0x000000
+    # 高亮候選項的文字顏色，要醒目！
+    hilited_candidate_text_color: 0xFFFFFF
+    # 高亮候選項的底色，若與背景色不同就會顯出光棒
+    hilited_candidate_back_color: 0xED9564
+  "preset_color_schemes/penumbra_dark_plus":
+    name: "Penumbra Dark+"
+    author: "nealmckee"
+    text_color: 0x9E9E9E
+    candidate_text_color: 0x00B0D2
+    back_color: 0x24272b
+    border_color: 0x8C96EC
+    hilited_text_color: 0xB49E33
+    hilited_back_color: 0x24272b
+    hilited_candidate_text_color: 0x8C96EC
+    hilited_candidate_back_color: 0x24272b
